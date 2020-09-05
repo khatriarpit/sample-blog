@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+  <title>Posts</title>
+</head>
+
+<body>
+    <br />
+    <header th:replace="layout :: site-header"/>
+    <main id="posts">
+      <div th:each="post : ${posts}">
+        <article>
+          <h2 class="title" th:text="${post.title}">Post Title</h2>
+          <div class="date">
+            <i>Posted on</i>
+            <span th:text="${#dates.format(post.date, 'dd-MMM-yyyy')}">22-May-2016</span>
+            <span th:if="${post.author}" th:remove="tag">
+              <i>by</i>
+              <span th:text="${post.author.fullName != null ?
+                post.author.fullName : post.author.username}">Svetlin Navkov</span>
+            </span>
+          </div>
+          <p class="content" th:utext="${post.body}">Post content</p>
+        </article>
+        <br />
+        <a href="delete.html" th:href="@{/posts/delete/__${post.id}__}">[Delete]</a>
+        <a href="update.html" th:href="@{/posts/update/__${post.id}__}">[Update]</a>
+      </div>
+    </main>
+
+    <footer th:replace="layout :: site-footer"/>
+</body>
+</html>

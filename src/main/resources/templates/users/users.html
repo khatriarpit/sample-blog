@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+  <title>Users</title>
+</head>
+
+<body>
+    <br />
+    <header th:replace="layout :: site-header"/>
+    <main id="users">
+      <div th:each="user : ${users}">
+        <article>
+          <label for="username">Username:</label>
+          <h2 class="username" th:if="${user.username != null}" th:text="${user.username}">Username</h2>
+          <label for="fullName">Full Name:</label>
+          <h2 class="fullName" th:if="${user.fullName != null}" th:text="${user.fullName}">Username</h2>
+        </article>
+        <br />
+      </div>
+    </main>
+
+    <footer th:replace="layout :: site-footer"/>
+</body>
+</html>
